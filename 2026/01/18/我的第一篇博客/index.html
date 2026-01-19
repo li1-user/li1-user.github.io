@@ -6,13 +6,15 @@
   
   <title>我的第一篇博客 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="article">
+  <meta name="description" content="技术点 1.安装 Hexo Hexo 是一个静态网站生成器，用于生成静态网站。2. Node.js：运行 Hexo 需要 Node.js 环境。3. Git：版本控制系统，用于管理代码版本。操作步骤 1.安装 Node.js 和 GitWindows 上安装 Node.js：访问 Node.js 官网下载并安装。安装后，运行   检查版本。  node -v 运行npm install -g he">
+<meta property="og:type" content="article">
 <meta property="og:title" content="我的第一篇博客">
 <meta property="og:url" content="http://example.com/2026/01/18/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="技术点 1.安装 Hexo Hexo 是一个静态网站生成器，用于生成静态网站。2. Node.js：运行 Hexo 需要 Node.js 环境。3. Git：版本控制系统，用于管理代码版本。操作步骤 1.安装 Node.js 和 GitWindows 上安装 Node.js：访问 Node.js 官网下载并安装。安装后，运行   检查版本。  node -v 运行npm install -g he">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-01-18T11:33:54.000Z">
-<meta property="article:modified_time" content="2026-01-18T11:33:54.454Z">
+<meta property="article:modified_time" content="2026-01-19T15:25:36.951Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -93,7 +95,20 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <p>技术点</p>
+<p>1.<br>安装 Hexo Hexo 是一个静态网站生成器，用于生成静态网站。<br>2. Node.js：运行 Hexo 需要 Node.js 环境。<br>3. Git：版本控制系统，用于管理代码版本。<br>操作<br>步骤</p>
+<p>1.<br>安装 Node.js 和 Git<br>Windows 上安装 Node.js：访问 Node.js 官网下载并安装。<br>安装后，运行   检查版本。<br>  node -v<br> 运行<br>npm install -g hexo-cli<br> 安装 Hexo CLI。</p>
+<p>2.<br>初始化 Hexo 项目<br>在命令行中运行以下命令创建 Hexo 项目：<br>mkdir myblog<br>cd myblog<br>hexo init</p>
+<p>这将创建一个名为  myblog  的新文件夹，并初始化为 Hexo 项目。<br>3.<br>安装主题和插件<br>进入项目目录：<br>cd myblog</p>
+<p>安装主题和插件：<br>npm install hexo-theme-themes<br>npm install hexo-generator</p>
+<p>4.<br>编写内容<br>使用 Markdown 编辑  source&#x2F;_posts  目录下的文章。<br>编辑  _config.yml  文件配置博客设置。</p>
+<p>5.<br>本地预览<br>运行以下命令在本地预览博客：<br>hexo server<br>打开浏览器访问  localhost:4000  查看博客。</p>
+<p>6.<br>部署到 GitHub Pages<br>创建 GitHub 仓库，username.github.io 。<br>将项目推送到 GitHub：<br>git add .<br>git commit -m “Initial commit”<br>git remote add origin<br>git push origin master</p>
+<p>配置 GitHub Pages：<br>deploy:<br>  type: git<br>  repo: gh-pages<br>  branch: gh-pages<br>推送到  gh-pages  分支 &#96;bash  hexo deploy</p>
+<p>7.<br>访问博客<br>几分钟后，访问  对应网址 查看博客。</p>
+<p>关键<br>Hexo 配置：<br>通过  _config.yml  文件配置博客主题、插件等。<br>Markdown：写博客内容，使用 Markdown 语法。<br>Git：版本控制，分支管理。<br>GitHub Pages：静态网站托管，自定义域名、HTTPS。</p>
+<p>常见问题<br>SSH 密钥：生成和添加到 GitHub。<br>GitHub Actions：工作流自动化部署。（这个尚未完成）<br>推送：权限、分支、远程仓库 URL。</p>
+
       
     </div>
     <footer class="article-footer">
