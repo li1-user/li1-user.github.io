@@ -71,6 +71,158 @@
       <div class="outer">
         <section id="main">
   
+    <article id="&#39;cnn-Day1-1" class="h-entry article article-type-&#39;cnn" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/01/21/Day1-1/" class="article-date">
+  <time class="dt-published" datetime="2026-01-21T15:41:26.000Z" itemprop="datePublished">2026-01-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/01/21/Day1-1/">Day1&#39;</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>本文基于 <a target="_blank" rel="noopener" href="https://www.runoob.com/pytorch/pytorch-neural-network.html">菜鸟教程 PyTorch 神经网络基础</a> 整理，并补充了实战建议与易踩坑提示，适合刚入门的同学快速上手。</p>
+</blockquote>
+<hr>
+<h2 id="1-神经网络到底在做什么？"><a href="#1-神经网络到底在做什么？" class="headerlink" title="1. 神经网络到底在做什么？"></a>1. 神经网络到底在做什么？</h2><p>一句话：把输入数据通过<strong>层层加权+激活</strong>映射到目标空间，让模型自己学会“特征提取器”。</p>
+<p>核心三件套：</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>神经元</td>
+<td>线性加权 + 非线性激活</td>
+</tr>
+<tr>
+<td>层</td>
+<td>把神经元按功能分组（输入&#x2F;隐藏&#x2F;输出）</td>
+</tr>
+<tr>
+<td>连接权重</td>
+<td>网络唯一可学习的参数</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="2-PyTorch-中的“骨架”：nn-Module"><a href="#2-PyTorch-中的“骨架”：nn-Module" class="headerlink" title="2. PyTorch 中的“骨架”：nn.Module"></a>2. PyTorch 中的“骨架”：nn.Module</h2><p>所有网络都继承自 <code>nn.Module</code>，必须实现两个方法：</p>
+<pre><code class="language-python">class SimpleNN(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.fc1 = nn.Linear(2, 2)  # 输入 2 维 → 隐藏 2 维
+        self.fc2 = nn.Linear(2, 1)  # 隐藏 2 维 → 输出 1 维
+
+    def forward(self, x):
+        x = torch.relu(self.fc1(x))
+        return self.fc2(x)
+
+打印模型即可看到网络结构：
+
+SimpleNN(
+  (fc1): Linear(in_features=2, out_features=2, bias=True)
+  (fc2): Linear(in_features=2, out_features=1, bias=True)
+)
+
+3. 激活函数怎么选？
+表格
+激活函数
+适用场景
+PyTorch 写法
+ReLU
+隐藏层默认首选
+ torch.relu(x) 
+Sigmoid
+二分类输出层
+ torch.sigmoid(x) 
+Softmax
+多分类输出层
+ F.softmax(x, dim=1) 
+Tanh
+早期网络，现在较少
+ torch.tanh(x) 
+小技巧：隐藏层一律 ReLU，输出层看任务类型，基本不会错。
+4. 损失函数 &amp; 优化器速查表
+表格
+任务类型
+损失函数
+优化器推荐
+回归
+ nn.MSELoss() 
+ Adam 
+二分类
+ nn.BCEWithLogitsLoss() 
+ Adam 
+多分类
+ nn.CrossEntropyLoss() 
+ Adam  /  SGD+momentum 
+5. 训练循环 6 步曲
+python
+for epoch in range(100):
+    model.train()                # 1. 训练模式
+    optimizer.zero_grad()        # 2. 清零梯度
+    output = model(X)            # 3. 前向传播
+    loss = criterion(output, Y)  # 4. 计算损失
+    loss.backward()              # 5. 反向传播
+    optimizer.step()             # 6. 更新权重
+
+每 10 个 epoch 打印一次损失，肉眼观察是否下降即可。
+6. 评估 &amp; 预测
+python
+model.eval()                    # 关键：切换评估模式
+with torch.no_grad():           # 关闭梯度，节省显存
+    output = model(X_test)
+    loss = criterion(output, Y_test)
+print(f&#39;Test Loss: {loss.item():.4f}&#39;)
+
+7. 常见网络家族一览
+表格
+网络缩写
+全称
+典型场景
+FNN
+前馈神经网络
+表格数据、简单回归
+CNN
+卷积神经网络
+图像、语音频谱
+RNN
+循环神经网络
+股票、文本、时间序列
+LSTM
+长短期记忆网络（RNN 升级版）
+长文本、机器翻译
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/01/21/Day1-1/" data-id="cuideSdnRgFkjT2CTbydJwEpp" data-title="Day1&#39;" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="&#39;sql-Day1" class="h-entry article article-type-&#39;sql" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2026/01/20/Day1/" class="article-date">
@@ -242,6 +394,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/01/21/Day1-1/">Day1&#39;</a>
+          </li>
         
           <li>
             <a href="/2026/01/20/Day1/">Day1&#39;</a>
