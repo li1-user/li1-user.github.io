@@ -71,6 +71,85 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-贪心算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/01/25/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2026-01-25T12:54:16.000Z" itemprop="datePublished">2026-01-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/01/25/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">&#39;贪心算法&#39;</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h1><h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>贪心算法（Greedy Algorithm）是一种在每一步选择中都采取当前状态下最优（即最有利）的选择，从而希望导致结果是全局最优的算法策略。它是一种简单而有效的算法思想，在许多问题中能够快速得到近似最优解。</p>
+<h2 id="二、基本原理"><a href="#二、基本原理" class="headerlink" title="二、基本原理"></a>二、基本原理</h2><p>贪心算法的基本思想是通过局部最优的选择来逐步构建全局最优解。其核心步骤如下：</p>
+<ol>
+<li><strong>分解问题</strong>：将问题分解为多个子问题，每个子问题都有一个最优解。</li>
+<li><strong>局部最优选择</strong>：在每个子问题中，选择当前状态下最优的解。</li>
+<li><strong>构建全局解</strong>：通过局部最优解逐步构建全局最优解。</li>
+</ol>
+<h2 id="三、贪心算法的特点"><a href="#三、贪心算法的特点" class="headerlink" title="三、贪心算法的特点"></a>三、贪心算法的特点</h2><ul>
+<li><strong>优点</strong>：<ul>
+<li><strong>简单高效</strong>：贪心算法通常具有较低的时间复杂度，能够在较短时间内得到解。</li>
+<li><strong>易于实现</strong>：贪心算法的逻辑相对简单，容易理解和实现。</li>
+</ul>
+</li>
+<li><strong>缺点</strong>：<ul>
+<li><strong>无法保证全局最优</strong>：贪心算法只能保证局部最优，不能保证最终结果是全局最优解。</li>
+<li><strong>适用范围有限</strong>：并非所有问题都适合使用贪心算法，需要根据具体问题进行判断。</li>
+</ul>
+</li>
+</ul>
+<h2 id="四、适用场景"><a href="#四、适用场景" class="headerlink" title="四、适用场景"></a>四、适用场景</h2><p>贪心算法适用于以下几种情况：</p>
+<ul>
+<li><strong>具有贪心选择性质</strong>：问题的全局最优解可以通过局部最优解来构建。</li>
+<li><strong>具有最优子结构</strong>：问题的最优解包含其子问题的最优解。</li>
+</ul>
+<h2 id="五、经典案例"><a href="#五、经典案例" class="headerlink" title="五、经典案例"></a>五、经典案例</h2><h3 id="（一）活动选择问题"><a href="#（一）活动选择问题" class="headerlink" title="（一）活动选择问题"></a>（一）活动选择问题</h3><p><strong>问题描述</strong>：给定一系列活动，每个活动都有一个开始时间和结束时间，选择尽可能多的不重叠活动。</p>
+<p><strong>贪心策略</strong>：每次选择结束时间最早的活动，并排除与其冲突的活动。</p>
+<p><strong>算法步骤</strong>：</p>
+<ol>
+<li>按活动的结束时间对活动进行排序。</li>
+<li>选择第一个活动。</li>
+<li>对于后续的每个活动，如果它的开始时间不早于当前活动的结束时间，则选择该活动，并更新当前活动。</li>
+</ol>
+<p><strong>代码示例</strong>（Python）：</p>
+<pre><code class="language-python">def activity_selection(start, finish):
+    activities = sorted(zip(start, finish), key=lambda x: x[1])  # 按结束时间排序
+    selected = [activities[0]]  # 选择第一个活动
+    for i in range(1, len(activities)):
+        if activities[i][0] &gt;= selected[-1][1]:  # 当前活动开始时间不早于上一个活动结束时间
+            selected.append(activities[i])
+    return selected
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/01/25/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/" data-id="cuidMhkvV_FDv0XAeuDN1quRi" data-title="&#39;贪心算法&#39;" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="&#39;cnn-Day1-1" class="h-entry article article-type-&#39;cnn" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2026/01/21/Day1-1/" class="article-date">
@@ -394,6 +473,10 @@ LSTM
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/01/25/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">&#39;贪心算法&#39;</a>
+          </li>
         
           <li>
             <a href="/2026/01/21/Day1-1/">Day1&#39;</a>
