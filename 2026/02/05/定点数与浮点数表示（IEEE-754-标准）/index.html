@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>定点数与浮点数表示（IEEE 754 标准） | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="定点数与浮点数表示（IEEE 754 标准）🎯 学习目标 理解定点数的基本思想（为浮点做铺垫） 掌握 IEEE 754 单精度（32位）浮点数的结构 能手动将十进制小数转换为 IEEE 754 格式 理解 为什么 0.1 + 0.2 !&#x3D; 0.3 了解特殊值：无穷大（∞）、NaN、非规格化数   一、为什么需要浮点数？整数可用补码完美表示，但现实中有大量小数：  科学计算：3.1415926 金">
+<meta property="og:type" content="article">
+<meta property="og:title" content="定点数与浮点数表示（IEEE 754 标准）">
+<meta property="og:url" content="http://example.com/2026/02/05/%E5%AE%9A%E7%82%B9%E6%95%B0%E4%B8%8E%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%EF%BC%88IEEE-754-%E6%A0%87%E5%87%86%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="定点数与浮点数表示（IEEE 754 标准）🎯 学习目标 理解定点数的基本思想（为浮点做铺垫） 掌握 IEEE 754 单精度（32位）浮点数的结构 能手动将十进制小数转换为 IEEE 754 格式 理解 为什么 0.1 + 0.2 !&#x3D; 0.3 了解特殊值：无穷大（∞）、NaN、非规格化数   一、为什么需要浮点数？整数可用补码完美表示，但现实中有大量小数：  科学计算：3.1415926 金">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-02-05T03:39:25.000Z">
+<meta property="article:modified_time" content="2026-02-05T04:00:45.534Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-定点数与浮点数表示（IEEE-754-标准）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/02/05/%E5%AE%9A%E7%82%B9%E6%95%B0%E4%B8%8E%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%EF%BC%88IEEE-754-%E6%A0%87%E5%87%86%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2026-02-05T03:39:25.000Z" itemprop="datePublished">2026-02-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">-计算机组成原理</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      定点数与浮点数表示（IEEE 754 标准）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="定点数与浮点数表示（IEEE-754-标准）"><a href="#定点数与浮点数表示（IEEE-754-标准）" class="headerlink" title="定点数与浮点数表示（IEEE 754 标准）"></a>定点数与浮点数表示（IEEE 754 标准）</h1><h2 id="🎯-学习目标"><a href="#🎯-学习目标" class="headerlink" title="🎯 学习目标"></a>🎯 学习目标</h2><ul>
+<li>理解<strong>定点数</strong>的基本思想（为浮点做铺垫）</li>
+<li>掌握 <strong>IEEE 754 单精度（32位）浮点数</strong>的结构</li>
+<li>能手动将十进制小数转换为 IEEE 754 格式</li>
+<li>理解 <strong>为什么 <code>0.1 + 0.2 != 0.3</code></strong></li>
+<li>了解特殊值：无穷大（∞）、NaN、非规格化数</li>
+</ul>
+<hr>
+<h2 id="一、为什么需要浮点数？"><a href="#一、为什么需要浮点数？" class="headerlink" title="一、为什么需要浮点数？"></a>一、为什么需要浮点数？</h2><p>整数可用补码完美表示，但现实中有大量<strong>小数</strong>：</p>
+<ul>
+<li>科学计算：<code>3.1415926</code></li>
+<li>金融：<code>99.99</code></li>
+<li>图形：坐标 <code>(1.5, -2.3)</code></li>
+</ul>
+<p>如果用<strong>固定小数点位置</strong>（比如始终保留2位小数），叫 <strong>定点数（Fixed-Point）</strong>：</p>
+<ul>
+<li>优点：硬件简单，运算快</li>
+<li>缺点：<strong>范围小、精度固定</strong>（无法同时表示 <code>0.000001</code> 和 <code>1000000.0</code>）</li>
+</ul>
+<blockquote>
+<!-- 批注：提问：“无法同时表示 0.000001 和 1000000.0 这是为啥” -->
+<blockquote>
+<p><strong>【Q&amp;A】为什么定点数无法同时表示极小数和极大数？</strong><br>因为定点数的小数点位置在硬件中是<strong>固定的</strong>。例如，若用32位表示，你必须预先分配多少位给整数部分、多少位给小数部分。  </p>
+<ul>
+<li>表示 <code>1000000.0</code> 需要约20位整数部分；  </li>
+<li>表示 <code>0.000001</code> 需要约20位小数部分；<br>但总共只有32位，无法兼顾。<br>而<strong>浮点数通过“阶码”动态调整尺度</strong>，用同一格式覆盖极大范围和高精度。</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>→ 所以需要 <strong>浮点数（Floating-Point）</strong>：<strong>小数点位置可以“浮动”</strong>，类似科学计数法！</p>
+<hr>
+<h2 id="二、科学计数法-→-浮点数思想"><a href="#二、科学计数法-→-浮点数思想" class="headerlink" title="二、科学计数法 → 浮点数思想"></a>二、科学计数法 → 浮点数思想</h2><p>十进制科学计数法：<br><code>123.45 = 1.2345 × 10²</code></p>
+<p>二进制科学计数法：<br><code>5.75₁₀ = 101.11₂ = 1.0111 × 2²</code></p>
+<p>浮点数就是把一个数拆成三部分：<br><strong>数值 &#x3D; (-1)^S × (1.M) × 2^(E - Bias)</strong></p>
+<ul>
+<li><strong>S</strong>：符号位（0正，1负）</li>
+<li><strong>M</strong>：尾数（Mantissa &#x2F; Fraction），表示有效数字</li>
+<li><strong>E</strong>：阶码（Exponent），表示指数（带偏移）</li>
+</ul>
+<blockquote>
+<p>✅ 这就是 <strong>IEEE 754 标准</strong>的核心！</p>
+</blockquote>
+<hr>
+<h2 id="三、IEEE-754-单精度（32位）格式"><a href="#三、IEEE-754-单精度（32位）格式" class="headerlink" title="三、IEEE 754 单精度（32位）格式"></a>三、IEEE 754 单精度（32位）格式</h2><table>
+<thead>
+<tr>
+<th>位段</th>
+<th>长度</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>S（符号）</strong></td>
+<td>1 位</td>
+<td>0 &#x3D; 正，1 &#x3D; 负</td>
+</tr>
+<tr>
+<td><strong>E（阶码）</strong></td>
+<td>8 位</td>
+<td>存储 <strong>指数 + 偏移量（Bias）</strong></td>
+</tr>
+<tr>
+<td><strong>M（尾数）</strong></td>
+<td>23 位</td>
+<td>存储小数部分（<strong>隐含前导1</strong>）</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>💡 <strong>偏移量（Bias）</strong>：单精度用 <strong>127</strong>，所以实际指数 &#x3D; E - 127</p>
+</blockquote>
+<h3 id="🌟-关键技巧：隐含前导1（Hidden-Bit）"><a href="#🌟-关键技巧：隐含前导1（Hidden-Bit）" class="headerlink" title="🌟 关键技巧：隐含前导1（Hidden Bit）"></a>🌟 关键技巧：隐含前导1（Hidden Bit）</h3><ul>
+<li>规格化数（Normalized）的二进制形式总是 <code>1.xxxxx</code></li>
+<li>所以 IEEE 754 <strong>不存这个“1”</strong>，只存小数部分 <code>xxxxx</code>，省1位，提高精度！</li>
+</ul>
+<blockquote>
+<!-- 批注：提问：“单精度实际是把通过科学计数法把原数表示为1位整数和多位小数加偏移的形式？” -->
+<blockquote>
+<p><strong>【Q&amp;A】单精度是否等于“1位整数 + 多位小数 + 偏移”？</strong><br>是的！更准确地说：<br>单精度将实数表示为 <strong>二进制科学计数法</strong> <code>(-1)^S × 1.M × 2^E</code>，然后：  </p>
+<ul>
+<li>符号 S 存 1 位；  </li>
+<li>尾数只存 <strong>M（23位小数部分）</strong>，前导 <code>1.</code> 是隐含的；  </li>
+<li>阶码存 <strong>E + 127（8位无符号整数）</strong>。<br>这三部分组成32位，实现高效、统一的浮点表示。</li>
+</ul>
+</blockquote>
+</blockquote>
+<hr>
+<h2 id="四、动手：十进制-→-IEEE-754（单精度）"><a href="#四、动手：十进制-→-IEEE-754（单精度）" class="headerlink" title="四、动手：十进制 → IEEE 754（单精度）"></a>四、动手：十进制 → IEEE 754（单精度）</h2><p><strong>例：<code>+5.75</code></strong></p>
+<ol>
+<li>转二进制：<code>101.11</code></li>
+<li>规格化：<code>1.0111 × 2²</code> → M &#x3D; <code>0111...</code>, E真实 &#x3D; 2</li>
+<li>阶码存储：2 + 127 &#x3D; 129 → <code>1000 0001</code></li>
+<li>组合：  <strong>0 10000001 01110000000000000000000</strong></li>
+</ol>
+<hr>
+<h2 id="五、为什么-0-1-0-2-0-3？"><a href="#五、为什么-0-1-0-2-0-3？" class="headerlink" title="五、为什么 0.1 + 0.2 != 0.3？"></a>五、为什么 <code>0.1 + 0.2 != 0.3</code>？</h2><ul>
+<li><code>0.1₁₀ = 0.0001100110011...₂</code>（无限循环）</li>
+<li>IEEE 754 只能存 <strong>23位尾数</strong> → 必须截断&#x2F;舍入</li>
+<li>内存中存的是 <strong>近似值</strong> ≈ 0.10000000149…</li>
+<li>两个近似值相加 ≠ 0.3 的近似值</li>
+</ul>
+<p>✅ 在 Python 中：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">0.1</span> + <span class="number">0.2</span></span><br><span class="line"><span class="number">0.30000000000000004</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">0.1</span> + <span class="number">0.2</span> == <span class="number">0.3</span></span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>💡 启示：永远不要用 &#x3D;&#x3D; 比较浮点数！应使用 abs(a - b) &lt; epsilon</p>
+</blockquote>
+<hr>
+<h2 id="六、IEEE-754-单精度（32位）"><a href="#六、IEEE-754-单精度（32位）" class="headerlink" title="六、IEEE 754 单精度（32位）"></a>六、IEEE 754 单精度（32位）</h2><table>
+<thead>
+<tr>
+<th>部分</th>
+<th>位数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S</td>
+<td>1</td>
+<td>符号位（0 &#x3D; 正，1 &#x3D; 负）</td>
+</tr>
+<tr>
+<td>E</td>
+<td>8</td>
+<td>阶码（Exponent），偏置值 Bias &#x3D; 127</td>
+</tr>
+<tr>
+<td>M</td>
+<td>23</td>
+<td>尾数（Mantissa&#x2F;Fraction），隐含前导 1</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>💡 <strong>小知识</strong>：实际数值计算公式为<br>$<br>(-1)^S \times (1.M) \times 2^{E - 127}<br>$<br>其中 <code>1.M</code> 表示二进制小数（如 <code>1.101</code>）。</p>
+</blockquote>
+<h4 id="示例：将十进制数-5-0-转换为-IEEE-754-单精度"><a href="#示例：将十进制数-5-0-转换为-IEEE-754-单精度" class="headerlink" title="示例：将十进制数 5.0 转换为 IEEE 754 单精度"></a>示例：将十进制数 5.0 转换为 IEEE 754 单精度</h4><ol>
+<li><p>转二进制：<br>$ 5.0_{10} &#x3D; 101.0_2 &#x3D; 1.01_2 \times 2^2 $</p>
+</li>
+<li><p>确定各字段：</p>
+<ul>
+<li>S &#x3D; 0（正数）</li>
+<li>E &#x3D; 2 + 127 &#x3D; 129 → 二进制 <code>10000001</code></li>
+<li>M &#x3D; <code>01</code> 后补零至 23 位 → <code>01000000000000000000000</code></li>
+</ul>
+</li>
+<li><p>最终 32 位表示：</p>
+</li>
+</ol>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0 10000001 01000000000000000000000</span><br><span class="line">↑ ↑        ↑</span><br><span class="line">S E(8位)   M(23位)</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="七、双精度（64位）简介"><a href="#七、双精度（64位）简介" class="headerlink" title="七、双精度（64位）简介"></a>七、双精度（64位）简介</h2><table>
+<thead>
+<tr>
+<th>部分</th>
+<th>位数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S</td>
+<td>1</td>
+<td>符号</td>
+</tr>
+<tr>
+<td>E</td>
+<td>11</td>
+<td>阶码（Bias &#x3D; 1023）</td>
+</tr>
+<tr>
+<td>M</td>
+<td>52</td>
+<td>尾数（隐含前导1）</td>
+</tr>
+</tbody></table>
+<p>精度：≈15 ～ 17 位十进制<br>范围：≈ ±10³⁰⁸<br>编程语言中 double 类型即为此格式</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/02/05/%E5%AE%9A%E7%82%B9%E6%95%B0%E4%B8%8E%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%EF%BC%88IEEE-754-%E6%A0%87%E5%87%86%EF%BC%89/" data-id="cuidkXBN-fvwtoeZH2FZjo_de" data-title="定点数与浮点数表示（IEEE 754 标准）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2026/02/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0-%E5%86%AF%C2%B7%E8%AF%BA%E4%BE%9D%E6%9B%BC%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">计算机系统概述 &amp; 冯·诺依曼体系结构</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">-计算机组成原理</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/02/">February 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">January 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/02/05/%E5%AE%9A%E7%82%B9%E6%95%B0%E4%B8%8E%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%EF%BC%88IEEE-754-%E6%A0%87%E5%87%86%EF%BC%89/">定点数与浮点数表示（IEEE 754 标准）</a>
+          </li>
+        
+          <li>
+            <a href="/2026/02/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0-%E5%86%AF%C2%B7%E8%AF%BA%E4%BE%9D%E6%9B%BC%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">计算机系统概述 &amp; 冯·诺依曼体系结构</a>
+          </li>
+        
+          <li>
+            <a href="/2026/01/27/%E6%97%A0%E5%90%8D%E6%9D%80%E5%AE%89%E8%A3%85/">无名杀安装</a>
+          </li>
+        
+          <li>
+            <a href="/2026/01/25/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">&#39;贪心算法&#39;</a>
+          </li>
+        
+          <li>
+            <a href="/2026/01/21/Day1-1/">Day1&#39;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
