@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>基本逻辑门与组合逻辑电路 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="🎯 学习目标 掌握 7 种基本逻辑门（AND、OR、NOT、NAND、NOR、XOR、XNOR） 理解布尔代数如何描述和简化逻辑关系 能用逻辑门搭建简单组合电路（如半加器、全加器） 区分组合逻辑与时序逻辑   一、什么是逻辑门？ 逻辑门 是实现布尔函数的电子器件，输入&#x2F;输出只有 0（低电平）或 1（高电平）。   二、7 种基本逻辑门   门 符号 布尔表达式 功能    NOT ⦁→">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基本逻辑门与组合逻辑电路">
+<meta property="og:url" content="http://example.com/2026/02/06/%E5%9F%BA%E6%9C%AC%E9%80%BB%E8%BE%91%E9%97%A8%E4%B8%8E%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="🎯 学习目标 掌握 7 种基本逻辑门（AND、OR、NOT、NAND、NOR、XOR、XNOR） 理解布尔代数如何描述和简化逻辑关系 能用逻辑门搭建简单组合电路（如半加器、全加器） 区分组合逻辑与时序逻辑   一、什么是逻辑门？ 逻辑门 是实现布尔函数的电子器件，输入&#x2F;输出只有 0（低电平）或 1（高电平）。   二、7 种基本逻辑门   门 符号 布尔表达式 功能    NOT ⦁→">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-02-06T03:19:18.000Z">
+<meta property="article:modified_time" content="2026-02-06T03:20:48.633Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-基本逻辑门与组合逻辑电路" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/02/06/%E5%9F%BA%E6%9C%AC%E9%80%BB%E8%BE%91%E9%97%A8%E4%B8%8E%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/" class="article-date">
+  <time class="dt-published" datetime="2026-02-06T03:19:18.000Z" itemprop="datePublished">2026-02-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">-计算机组成原理</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      基本逻辑门与组合逻辑电路
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="🎯-学习目标"><a href="#🎯-学习目标" class="headerlink" title="🎯 学习目标"></a>🎯 学习目标</h2><ul>
+<li>掌握 7 种基本逻辑门（AND、OR、NOT、NAND、NOR、XOR、XNOR）</li>
+<li>理解布尔代数如何描述和简化逻辑关系</li>
+<li>能用逻辑门搭建简单组合电路（如半加器、全加器）</li>
+<li>区分组合逻辑与时序逻辑</li>
+</ul>
+<hr>
+<h2 id="一、什么是逻辑门？"><a href="#一、什么是逻辑门？" class="headerlink" title="一、什么是逻辑门？"></a>一、什么是逻辑门？</h2><blockquote>
+<p><strong>逻辑门</strong> 是实现布尔函数的电子器件，输入&#x2F;输出只有 <code>0</code>（低电平）或 <code>1</code>（高电平）。</p>
+</blockquote>
+<hr>
+<h2 id="二、7-种基本逻辑门"><a href="#二、7-种基本逻辑门" class="headerlink" title="二、7 种基本逻辑门"></a>二、7 种基本逻辑门</h2><table>
+<thead>
+<tr>
+<th>门</th>
+<th>符号</th>
+<th>布尔表达式</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NOT</td>
+<td>⦁→○</td>
+<td>( Y &#x3D; \overline{A} )</td>
+<td>取反</td>
+</tr>
+<tr>
+<td>AND</td>
+<td>&amp;</td>
+<td>( Y &#x3D; A \cdot B )</td>
+<td>全1才1</td>
+</tr>
+<tr>
+<td>OR</td>
+<td>≥1</td>
+<td>( Y &#x3D; A + B )</td>
+<td>有1就1</td>
+</tr>
+<tr>
+<td>NAND</td>
+<td>&amp;+○</td>
+<td>( Y &#x3D; \overline{A \cdot B} )</td>
+<td>全1才0</td>
+</tr>
+<tr>
+<td>NOR</td>
+<td>≥1+○</td>
+<td>( Y &#x3D; \overline{A + B} )</td>
+<td>全0才1</td>
+</tr>
+<tr>
+<td>XOR</td>
+<td>&#x3D;1</td>
+<td>( Y &#x3D; A \oplus B )</td>
+<td>不同为1</td>
+</tr>
+<tr>
+<td>XNOR</td>
+<td>&#x3D;1+○</td>
+<td>( Y &#x3D; \overline{A \oplus B} )</td>
+<td>相同为1</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>✅ <strong>重点</strong>：</p>
+<ul>
+<li><strong>NAND 和 NOR 是“通用门”</strong>：仅用它们可构建任何逻辑电路。</li>
+<li><strong>XOR 用于加法、奇偶校验</strong>。</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="三、布尔代数基础"><a href="#三、布尔代数基础" class="headerlink" title="三、布尔代数基础"></a>三、布尔代数基础</h2><p>常用定律包括交换律、结合律、分配律、<strong>德·摩根律</strong>、<strong>吸收律</strong>等。</p>
+<h3 id="德·摩根律（De-Morgan’s-Laws）"><a href="#德·摩根律（De-Morgan’s-Laws）" class="headerlink" title="德·摩根律（De Morgan’s Laws）"></a>德·摩根律（De Morgan’s Laws）</h3><p>[<br>\begin{aligned}<br>\overline{A + B} &amp;&#x3D; \overline{A} \cdot \overline{B} \<br>\overline{A \cdot B} &amp;&#x3D; \overline{A} + \overline{B}<br>\end{aligned}<br>]</p>
+<blockquote>
+<!-- 批注：提问“德摩根的没看懂，就-A单独是啥啊” -->
+<blockquote>
+<p><strong>【Q&amp;A】(\overline{A}) 是什么？德·摩根怎么理解？</strong>  </p>
+<ul>
+<li>(\overline{A}) 表示 <strong>A 的逻辑非（NOT A）</strong>，不是数学负号。  <ul>
+<li>若 (A &#x3D; 0)，则 (\overline{A} &#x3D; 1)；若 (A &#x3D; 1)，则 (\overline{A} &#x3D; 0)。</li>
+</ul>
+</li>
+<li>德·摩根的核心思想：  <ul>
+<li>“A 或 B 不成立” ⇔ “A 不成立 且 B 也不成立”  </li>
+<li>“A 与 B 不成立” ⇔ “A 不成立 或 B 不成立”</li>
+</ul>
+</li>
+<li>电路意义：可用 NOT + AND 实现 NOR，体现门电路的等价性。</li>
+</ul>
+</blockquote>
+</blockquote>
+<hr>
+<h3 id="吸收律（Absorption-Law）"><a href="#吸收律（Absorption-Law）" class="headerlink" title="吸收律（Absorption Law）"></a>吸收律（Absorption Law）</h3><p>[<br>\begin{aligned}<br>A + A \cdot B &amp;&#x3D; A \<br>A \cdot (A + B) &amp;&#x3D; A<br>\end{aligned}<br>]</p>
+<blockquote>
+<!-- 批注：提问“吸收率是怎么得到的？” -->
+<blockquote>
+<p><strong>【Q&amp;A】吸收律为什么成立？怎么推导？</strong><br><strong>1. 真值表验证</strong>：无论 B 取何值，(A + AB) 的结果始终等于 A。<br><strong>2. 代数推导</strong>：<br>[<br>A + AB &#x3D; A \cdot 1 + A \cdot B &#x3D; A(1 + B) &#x3D; A \cdot 1 &#x3D; A<br>]<br>（因为 (1 + B &#x3D; 1) 在布尔代数中恒成立）<br><strong>3. 电路意义</strong>：当 A 已确定输出时，额外的 (AB) 路径不影响结果，被“吸收”。<br>→ 这是逻辑简化的重要工具！</p>
+</blockquote>
+</blockquote>
+<hr>
+<h2 id="四、组合逻辑电路"><a href="#四、组合逻辑电路" class="headerlink" title="四、组合逻辑电路"></a>四、组合逻辑电路</h2><blockquote>
+<p><strong>组合逻辑电路</strong>：输出<strong>仅取决于当前输入</strong>，无记忆、无反馈。</p>
+</blockquote>
+<h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><ul>
+<li>输入变化 → 输出立即响应（忽略延迟）</li>
+<li>由逻辑门直接连接构成</li>
+<li>例子：加法器、译码器、多路选择器</li>
+</ul>
+<hr>
+<h2 id="五、实战：加法器设计"><a href="#五、实战：加法器设计" class="headerlink" title="五、实战：加法器设计"></a>五、实战：加法器设计</h2><h3 id="1-半加器（Half-Adder）"><a href="#1-半加器（Half-Adder）" class="headerlink" title="1. 半加器（Half Adder）"></a>1. 半加器（Half Adder）</h3><ul>
+<li>输入：A, B  </li>
+<li>输出：  <ul>
+<li><strong>Sum</strong> &#x3D; (A \oplus B)  </li>
+<li><strong>Carry</strong> &#x3D; (A \cdot B)</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-全加器（Full-Adder）"><a href="#2-全加器（Full-Adder）" class="headerlink" title="2. 全加器（Full Adder）"></a>2. 全加器（Full Adder）</h3><ul>
+<li>输入：A, B, Cin  </li>
+<li>可用 <strong>2 个半加器 + 1 个 OR 门</strong> 构成  </li>
+<li>是构建多位加法器（如32位ALU）的基本单元</li>
+</ul>
+<hr>
+<h2 id="六、组合逻辑-vs-时序逻辑（预览）"><a href="#六、组合逻辑-vs-时序逻辑（预览）" class="headerlink" title="六、组合逻辑 vs 时序逻辑（预览）"></a>六、组合逻辑 vs 时序逻辑（预览）</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>组合逻辑</th>
+<th>时序逻辑</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>输出依赖</td>
+<td>仅当前输入</td>
+<td>当前输入 + 历史状态</td>
+</tr>
+<tr>
+<td>有无记忆</td>
+<td>❌ 无</td>
+<td>✅ 有（靠寄存器）</td>
+</tr>
+<tr>
+<td>例子</td>
+<td>加法器、译码器</td>
+<td>寄存器、计数器、CPU</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="📝-小结"><a href="#📝-小结" class="headerlink" title="📝 小结"></a>📝 小结</h2><ul>
+<li>逻辑门是数字电路的“原子”</li>
+<li>布尔代数是设计与优化的数学工具</li>
+<li><strong>半加器 &#x3D; XOR + AND；全加器 &#x3D; 2×半加器 + OR</strong></li>
+<li><strong>德·摩根律</strong> 和 <strong>吸收律</strong> 是化简的关键</li>
+<li>组合逻辑 &#x3D; 无记忆，纯门电路</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/02/06/%E5%9F%BA%E6%9C%AC%E9%80%BB%E8%BE%91%E9%97%A8%E4%B8%8E%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/" data-id="cuidd2UQWvyzlqIlRiyBdJaAR" data-title="基本逻辑门与组合逻辑电路" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2026/02/05/%E5%AE%9A%E7%82%B9%E6%95%B0%E4%B8%8E%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%EF%BC%88IEEE-754-%E6%A0%87%E5%87%86%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">定点数与浮点数表示（IEEE 754 标准）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">-计算机组成原理</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/02/">February 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/01/">January 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/02/06/%E5%9F%BA%E6%9C%AC%E9%80%BB%E8%BE%91%E9%97%A8%E4%B8%8E%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">基本逻辑门与组合逻辑电路</a>
+          </li>
+        
+          <li>
+            <a href="/2026/02/05/%E5%AE%9A%E7%82%B9%E6%95%B0%E4%B8%8E%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%EF%BC%88IEEE-754-%E6%A0%87%E5%87%86%EF%BC%89/">定点数与浮点数表示（IEEE 754 标准）</a>
+          </li>
+        
+          <li>
+            <a href="/2026/02/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0-%E5%86%AF%C2%B7%E8%AF%BA%E4%BE%9D%E6%9B%BC%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">计算机系统概述 &amp; 冯·诺依曼体系结构</a>
+          </li>
+        
+          <li>
+            <a href="/2026/01/27/%E6%97%A0%E5%90%8D%E6%9D%80%E5%AE%89%E8%A3%85/">无名杀安装</a>
+          </li>
+        
+          <li>
+            <a href="/2026/01/25/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">&#39;贪心算法&#39;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
