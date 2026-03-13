@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>我的第一篇博客 | Hexo</title>
+  <title>表的创建和基础的增删改查 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="技术点 1.安装 Hexo Hexo 是一个静态网站生成器，用于生成静态网站。2. Node.js：运行 Hexo 需要 Node.js 环境。3. Git：版本控制系统，用于管理代码版本。操作步骤 1.安装 Node.js 和 GitWindows 上安装 Node.js：访问 Node.js 官网下载并安装。安装后，运行   检查版本。  node -v 运行npm install -g he">
+  <meta name="description" content="创建表 通过create table实现  1234create table 表名(    表中每列元素名+数据类型+（主键）+是否可以为空    --主键唯一，且主键内容不能重复)  增加&#x2F;插入 通过insert into实现123insert into [表名(对应每列元素名)]value[(每行对应元素的实际值)]--insert（）中的顺序要和表本身的顺序相同  删除 通过del">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的第一篇博客">
-<meta property="og:url" content="http://example.com/2026/01/18/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:title" content="表的创建和基础的增删改查">
+<meta property="og:url" content="http://example.com/2026/03/13/SQL%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="技术点 1.安装 Hexo Hexo 是一个静态网站生成器，用于生成静态网站。2. Node.js：运行 Hexo 需要 Node.js 环境。3. Git：版本控制系统，用于管理代码版本。操作步骤 1.安装 Node.js 和 GitWindows 上安装 Node.js：访问 Node.js 官网下载并安装。安装后，运行   检查版本。  node -v 运行npm install -g he">
+<meta property="og:description" content="创建表 通过create table实现  1234create table 表名(    表中每列元素名+数据类型+（主键）+是否可以为空    --主键唯一，且主键内容不能重复)  增加&#x2F;插入 通过insert into实现123insert into [表名(对应每列元素名)]value[(每行对应元素的实际值)]--insert（）中的顺序要和表本身的顺序相同  删除 通过del">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-01-18T11:33:54.000Z">
-<meta property="article:modified_time" content="2026-01-19T15:25:36.951Z">
+<meta property="article:published_time" content="2026-03-13T13:29:59.000Z">
+<meta property="article:modified_time" content="2026-03-13T14:01:21.604Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -73,12 +73,16 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-我的第一篇博客" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-SQL的增删改查" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2026/01/18/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="article-date">
-  <time class="dt-published" datetime="2026-01-18T11:33:54.000Z" itemprop="datePublished">2026-01-18</time>
+    <a href="/2026/03/13/SQL%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/" class="article-date">
+  <time class="dt-published" datetime="2026-03-13T13:29:59.000Z" itemprop="datePublished">2026-03-13</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -87,7 +91,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      我的第一篇博客
+      表的创建和基础的增删改查
     </h1>
   
 
@@ -95,24 +99,34 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>技术点</p>
-<p>1.<br>安装 Hexo Hexo 是一个静态网站生成器，用于生成静态网站。<br>2. Node.js：运行 Hexo 需要 Node.js 环境。<br>3. Git：版本控制系统，用于管理代码版本。<br>操作<br>步骤</p>
-<p>1.<br>安装 Node.js 和 Git<br>Windows 上安装 Node.js：访问 Node.js 官网下载并安装。<br>安装后，运行   检查版本。<br>  node -v<br> 运行<br>npm install -g hexo-cli<br> 安装 Hexo CLI。</p>
-<p>2.<br>初始化 Hexo 项目<br>在命令行中运行以下命令创建 Hexo 项目：<br>mkdir myblog<br>cd myblog<br>hexo init</p>
-<p>这将创建一个名为  myblog  的新文件夹，并初始化为 Hexo 项目。<br>3.<br>安装主题和插件<br>进入项目目录：<br>cd myblog</p>
-<p>安装主题和插件：<br>npm install hexo-theme-themes<br>npm install hexo-generator</p>
-<p>4.<br>编写内容<br>使用 Markdown 编辑  source&#x2F;_posts  目录下的文章。<br>编辑  _config.yml  文件配置博客设置。</p>
-<p>5.<br>本地预览<br>运行以下命令在本地预览博客：<br>hexo server<br>打开浏览器访问  localhost:4000  查看博客。</p>
-<p>6.<br>部署到 GitHub Pages<br>创建 GitHub 仓库，username.github.io 。<br>将项目推送到 GitHub：<br>git add .<br>git commit -m “Initial commit”<br>git remote add origin<br>git push origin master</p>
-<p>配置 GitHub Pages：<br>deploy:<br>  type: git<br>  repo: gh-pages<br>  branch: gh-pages<br>推送到  gh-pages  分支 &#96;bash  hexo deploy</p>
-<p>7.<br>访问博客<br>几分钟后，访问  对应网址 查看博客。</p>
-<p>关键<br>Hexo 配置：<br>通过  _config.yml  文件配置博客主题、插件等。<br>Markdown：写博客内容，使用 Markdown 语法。<br>Git：版本控制，分支管理。<br>GitHub Pages：静态网站托管，自定义域名、HTTPS。</p>
-<p>常见问题<br>SSH 密钥：生成和添加到 GitHub。<br>GitHub Actions：工作流自动化部署。（这个尚未完成）<br>推送：权限、分支、远程仓库 URL。</p>
+        <h2 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h2><ul>
+<li>通过<strong>create table</strong>实现</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table 表名(</span><br><span class="line">    表中每列元素名+数据类型+（主键）+是否可以为空</span><br><span class="line">    --主键唯一，且主键内容不能重复</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h2 id="增加-插入"><a href="#增加-插入" class="headerlink" title="增加&#x2F;插入"></a>增加&#x2F;插入</h2><ul>
+<li>通过<strong>insert into</strong>实现<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">insert into [表名(对应每列元素名)]</span><br><span class="line">value[(每行对应元素的实际值)]</span><br><span class="line">--insert（）中的顺序要和表本身的顺序相同</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><ul>
+<li>通过<strong>delete from … where</strong>实现</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">delete from [表名]</span><br><span class="line">where [要删除对象的查询列元素]</span><br><span class="line">--绝对禁止无WHERE的DELETE（会清空全表）</span><br></pre></td></tr></table></figure>
+
+<p>##修改</p>
+<ul>
+<li>通过<strong>update…set…where</strong>实现</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">update 表名</span><br><span class="line">set [修改后的内容（完整）]</span><br><span class="line">where [修改对象的查询列元素]</span><br><span class="line">--set后的修改内容中间用‘，’间隔</span><br></pre></td></tr></table></figure>
+
+<p>##查找</p>
+<ul>
+<li>通过<strong>select.. from</strong>实现<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT [列名或表达式]</span><br><span class="line">FROM [表名或视图名]</span><br><span class="line">order by  [排序的根据]</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/01/18/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" data-id="cuidSnpGUrHHn5JEl-tYX3tad" data-title="我的第一篇博客" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/03/13/SQL%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/" data-id="cuid5TcR16rAwQHta-YFeUBHz" data-title="表的创建和基础的增删改查" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -122,19 +136,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2026/01/20/Day1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Day1&#39;
-        
-      </div>
-    </a>
   
-  
-    <a href="/2026/01/18/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2026/03/03/%E7%B1%BB%E5%92%8C%E6%96%87%E4%BB%B6/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">Java 核心机制深度解析：包、类与访问控制的艺术</div>
     </a>
   
 </nav>
